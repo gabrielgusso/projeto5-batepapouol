@@ -1,35 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
+
 * {
     box-sizing: border-box;
 }
 
 body {
     background-color: grey;
+    font-family: 'Roboto', sans-serif;
 }
 
 .container {
     background-color: red;
     width: 375px;
-    height: 667px;
     margin: auto;
+    overflow-y: scroll;
+    word-wrap: break-word;
 }
 
 .top {
     height: 80px;
-    
-    background-color: white;
+    width: 375px;
+    background-color: green;
+    position: fixed;
+
 }
 
 .mid {
-    height: 507px;
-    background-color: aqua;
+    padding-top: 80px;
+    height: 587px;
+    font-size: 14px;
     
 }
 
 .bottom {
     height: 80px;
-    background-color: white;
-    
+    width: 375px;
+    background-color: blue;
+    position: fixed;
+
 }
+
+.all-box-msg {
+    padding-top: 26px;
+}
+
+.box-message {
+    width: 375px;
+    background-color: #FFFFFF;
+    margin-bottom: 4px;
+    padding: 10px;
+
+}
+
+.box-status {
+    width: 375px;
+    background-color: #DCDCDC;
+    margin-bottom: 4px;
+    padding: 10px;
+
+}
+
+.msg-time {
+    color: #AAAAAA;
+}
+
+.msg-name {
+    margin-left: 8px;
+    font-weight: 700;
+}
+
+.msg-text {
+    margin-left: 8px;
+}
+
 
 @media (max-width: 375px) {
     
