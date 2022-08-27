@@ -10,7 +10,7 @@ body {
 }
 
 .container {
-    background-color: red;
+    background-color: #E5E5E5;;
     width: 375px;
     margin: auto;
     overflow-y: scroll;
@@ -20,9 +20,22 @@ body {
 .top {
     height: 80px;
     width: 375px;
-    background-color: green;
+    background-color: #FFFFFF;;
     position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
+.top img {
+    width: 75px;
+    height: 53px;
+    margin-left: 22px;
+}
+
+.top ion-icon {
+    font-size: 50px;
+    margin-right: 22px;
 }
 
 .mid {
@@ -35,9 +48,12 @@ body {
 .bottom {
     height: 80px;
     width: 375px;
-    background-color: blue;
+    background-color: #FFFFFF;;
     position: fixed;
-
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    
 }
 
 .all-box-msg {
@@ -71,6 +87,29 @@ body {
 
 .msg-text {
     margin-left: 8px;
+}
+
+textarea {
+    width: 70%;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    resize: none;
+    display: flex;
+    align-items: center;
+    padding-top: 25px;
+    font-family: 'Roboto', sans-serif;
+}
+
+textarea::placeholder {
+    color: black;
+    font-style: italic;
+}
+
+.bottom ion-icon {
+    font-size: 30px;
+    cursor: pointer;
 }
 
 

@@ -1,9 +1,12 @@
 let messages = []
 let onlinepeoples = []
+let askName = ""
 Status()
 
+//ENTRAR NA SALA
 function Status(){
-    const askName = prompt("Qual seu nome?")
+    askName = prompt("Qual seu nome?")
+    // askName = "r3hgfgbeg"
     const nameObj = {
         name: askName
     }
@@ -14,27 +17,54 @@ function Status(){
 }
 
 function tratarSucesso(){
-    console.log("deu certo")
+    console.log("Nome do participante recebido")
+    setInterval(EnviarRequisicao, 5000)
 }
 
-function tratarError(erro){
+function tratarError(erro){ 
+    const erroNum = erro.response.status
+    if(erroNum === 404){
+        console.log("Erro no servidor ao salvar nome")
+        alert("Por favor insira seu nome novamente")
+        Status()
+    } else if(erroNum === 400 || erroNum === 409 || erroNum === 422){
+        alert("Ja existe alguem com esse nome, por favor insira outro nome")
+        Status()
+    }
+}
+//MANTER CONEXAO
+function EnviarRequisicao(){
+    const nameObj = {
+        name: askName
+    }
+    const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/status', nameObj)
+    requisicao.then(tratarSucessoStatus);
+    requisicao.catch(tratarErrorStatus);
+}
+
+function tratarSucessoStatus(){
+    console.log(`Status recebido / Participante ${askName} ativo`)
+}
+
+function tratarErrorStatus(erro){
+    console.log("Status erro recebido")
     console.log(erro)
 }
-
+//BUSCAR MENSAGENS
 function getData(){  
     const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages") 
 
     promise.then(messagesArrived)
 
 }
-
 getData()
+setInterval(getData, 2000)
 
 
 
 function messagesArrived(answer){
     messages = answer.data
-
+    console.log("RENDERIZANDO MSGs")
 
     renderMessages()
 }
@@ -56,4 +86,30 @@ function renderMessages(){
     lastChild.scrollIntoView();
 
     }
+}
+
+//ENVIAR MENSAGEM
+function sendMessage(){
+    const message = document.querySelector('.textArea')
+    console.log(message.value)
+    const newMessage = {
+        from: askName,
+        to: 'Todos',
+        text: message.value,
+        type: "message", // ou "private_message" para o bônus
+    }
+    const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', newMessage);
+
+    requisicao.then(tratarSucessoEnviar);
+    requisicao.catch(tratarErrorEnviar);
+    message.value = ''
+    message.innerHTML = ''
+}
+
+function tratarSucessoEnviar(){
+    getData()
+}
+
+function tratarErrorEnviar(){
+
 }
